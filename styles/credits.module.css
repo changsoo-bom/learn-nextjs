@@ -12,6 +12,7 @@
     margin: 0 auto ;
     padding-bottom: 50px;
     text-transform: uppercase;
+    text-align: center;
 }
 .profilebox{
     display: flex;
