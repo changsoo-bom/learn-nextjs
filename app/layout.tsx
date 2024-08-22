@@ -2,6 +2,7 @@ import { describe } from "node:test"
 import Navigation from "../components/navigation"
 import { title } from "node:process"
 import { Metadata } from "next"
+import "../styles/global.css"
 
 export const metadata: Metadata = {
   title:{
