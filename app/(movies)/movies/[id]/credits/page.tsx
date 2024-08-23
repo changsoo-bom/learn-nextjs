@@ -1,39 +1,20 @@
-import { API_URL } from "../../../../(home)/page";
-import styles from "../../../../../styles/credits.module.css"
+import { Suspense } from "react";
+import Credits from "../../../../../components/movie-credits";
 
-interface IParams{
-    params:{id:string};
+interface IParams {
+    params: { id: string };
 }
 
-export async function getCredits(id:string) {
-    const response = await fetch(`${API_URL}/${id}/credits`);
-    return response.json();
+export const metadata = {
+    title: "Credits"
 }
 
-export default async function Credits({params: {id}}: IParams){
-    const credits = await getCredits(id);
-
-    return(
+export default async function CreditsPage({params: {id}}: IParams) {
+    return (
         <>
-            <h1 className={styles.name}>credits</h1>
-            <div className={styles.container}>
-                {credits.map(credit => (
-                    <div className={styles.profilebox} key={credit.id}>
-                        {
-                            credit.profile_path ?
-                            <img  src={credit.profile_path} alt="" /> 
-                            : <div className={styles.noimg}>No Image</div>
-                        }
-                        
-                        <div className={styles.info}>
-                            <h1>{credit.character}</h1>
-                            <div>
-                                <h3>{credit.name}</h3>
-                            </div>
-                        </div>
-                    </div>
-                ))}
-            </div>
+            <Suspense fallback={<h1>Loading movie info</h1>}>
+                <Credits id={id}/>
+            </Suspense>
         </>
-    )
+    );
 }
